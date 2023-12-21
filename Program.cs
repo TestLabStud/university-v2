@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-// Main Application Class
 public class TableReservationApp
 {
     static void Main(string[] args)
@@ -16,7 +15,6 @@ public class TableReservationApp
     }
 }
 
-// Reservation Manager Class
 public class ReservationManagerClass
 {
     // res
@@ -27,7 +25,6 @@ public class ReservationManagerClass
         res = new List<RestaurantClass>();
     }
 
-    // Add Restaurant Method
     public void AddRestaurantMethod(string n, int t)
     {
         try
@@ -47,8 +44,6 @@ public class ReservationManagerClass
         }
     }
 
-    // Load Restaurants From
-    // File
     private void LoadRestaurantsFromFileMethod(string fileP)
     {
         try
@@ -73,7 +68,6 @@ public class ReservationManagerClass
         }
     }
 
-    //Find All Free Tables
     public List<string> FindAllFreeTables(DateTime dt)
     {
         try
@@ -146,7 +140,6 @@ public class ReservationManagerClass
         }
     }
 
-    // count available tables in a restaurant
     public int CountAvailableTablesForRestaurantClassAndDateTimeMethod(RestaurantClass r, DateTime dt)
     {
         try
@@ -169,14 +162,12 @@ public class ReservationManagerClass
     }
 }
 
-// Restaurant Class
 public class RestaurantClass
 {
     public string n; //name
     public RestaurantTableClass[] t; // tables
 }
 
-// Table Class
 public class RestaurantTableClass
 {
     private List<DateTime> bd; //booked dates
@@ -187,7 +178,6 @@ public class RestaurantTableClass
         bd = new List<DateTime>();
     }
 
-    // book
     public bool Book(DateTime d)
     {
         try
@@ -207,7 +197,6 @@ public class RestaurantTableClass
         }
     }
 
-    // is booked
     public bool IsBooked(DateTime d)
     {
         return bd.Contains(d);
