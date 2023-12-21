@@ -44,30 +44,6 @@ public class ReservationManagerClass
         }
     }
 
-    private void LoadRestaurantsFromFileMethod(string fileP)
-    {
-        try
-        {
-            string[] ls = File.ReadAllLines(fileP);
-            foreach (string l in ls)
-            {
-                var parts = l.Split(',');
-                if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
-                {
-                    AddRestaurantMethod(parts[0], tableCount);
-                }
-                else
-                {
-                    Console.WriteLine(l);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error");
-        }
-    }
-
     public List<string> FindAllFreeTables(DateTime dt)
     {
         try
