@@ -30,11 +30,11 @@ public class ReservationManagerClass
         try
         {
             RestaurantClass r = new RestaurantClass();
-            r.n = n;
-            r.t = new RestaurantTableClass[t];
+            r.name = n;
+            r.table = new RestaurantTableClass[t];
             for (int i = 0; i < t; i++)
             {
-                r.t[i] = new RestaurantTableClass();
+                r.table[i] = new RestaurantTableClass();
             }
             res.Add(r);
         }
@@ -51,11 +51,11 @@ public class ReservationManagerClass
             List<string> free = new List<string>();
             foreach (var r in res)
             {
-                for (int i = 0; i < r.t.Length; i++)
+                for (int i = 0; i < r.table.Length; i++)
                 {
-                    if (!r.t[i].IsBooked(dt))
+                    if (!r.table[i].IsBooked(dt))
                     {
-                        free.Add($"{r.n} - Table {i + 1}");
+                        free.Add($"{r.name} - Table {i + 1}");
                     }
                 }
             }
@@ -72,14 +72,14 @@ public class ReservationManagerClass
     {
         foreach (var r in res)
         {
-            if (r.n == rName)
+            if (r.name == rName)
             {
-                if (tNumber < 0 || tNumber >= r.t.Length)
+                if (tNumber < 0 || tNumber >= r.table.Length)
                 {
                     throw new Exception(null); //Invalid table number
                 }
 
-                return r.t[tNumber].Book(d);
+                return r.table[tNumber].Book(d);
             }
         }
 
@@ -121,7 +121,7 @@ public class ReservationManagerClass
         try
         {
             int count = 0;
-            foreach (var t in r.t)
+            foreach (var t in r.table)
             {
                 if (!t.IsBooked(dt))
                 {
@@ -140,8 +140,8 @@ public class ReservationManagerClass
 
 public class RestaurantClass
 {
-    public string n; //name
-    public RestaurantTableClass[] t; // tables
+    public string name;
+    public RestaurantTableClass[] table;
 }
 
 public class RestaurantTableClass
