@@ -146,24 +146,28 @@ public class RestaurantClass
 
 public class RestaurantTableClass
 {
-    private List<DateTime> bd; //booked dates
-
+    private List<DateTime> bookedDates;
 
     public RestaurantTableClass()
     {
-        bd = new List<DateTime>();
+        bookedDates = new List<DateTime>();
     }
 
-    public bool Book(DateTime d)
+    public bool IsBooked(DateTime date)
+    {
+        return bookedDates.Contains(date);
+    }
+
+    public bool Book(DateTime date)
     {
         try
         { 
-            if (bd.Contains(d))
+            if (IsBooked(date))
             {
                 return false;
             }
-            //add to bd
-            bd.Add(d);
+  
+            bookedDates.Add(date);
             return true;
         }
         catch (Exception ex)
@@ -173,8 +177,4 @@ public class RestaurantTableClass
         }
     }
 
-    public bool IsBooked(DateTime d)
-    {
-        return bd.Contains(d);
-    }
 }
