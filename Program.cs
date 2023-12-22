@@ -43,10 +43,31 @@ public class ReservationManagerClass
         }
     }
 
+    public bool BookTable(string restorauntName, DateTime date, int tableNumber)
+    {
+        foreach (var restoraunt in res)
+        {
+            if (restoraunt.name == restorauntName)
+            {
+                if (tableNumber < 0 || tableNumber >= restoraunt.table.Length)
+                {
+                    throw new Exception(null); //Invalid table number
+                }
+
+                return restoraunt.table[tableNumber].Book(date);
+            }
+        }
+
+        throw new Exception(null); //Restaurant not found
+    } 
+}
+
+public class TablesManager: ReservationManagerClass
+{
     public List<string> FindAllFreeTables(DateTime dateTime)
     {
         try
-        { 
+        {
             List<string> free = new List<string>();
             foreach (var restoraunt in res)
             {
@@ -67,28 +88,31 @@ public class ReservationManagerClass
         }
     }
 
-    public bool BookTable(string restorauntName, DateTime date, int tableNumber)
+    public int CountAvailableTables(RestaurantClass restaurant, DateTime dateTime)
     {
-        foreach (var restoraunt in res)
+        try
         {
-            if (restoraunt.name == restorauntName)
+            int count = 0;
+            foreach (var table in restaurant.table)
             {
-                if (tableNumber < 0 || tableNumber >= restoraunt.table.Length)
+                if (!table.IsBooked(dateTime))
                 {
-                    throw new Exception(null); //Invalid table number
+                    count++;
                 }
-
-                return restoraunt.table[tableNumber].Book(date);
             }
+            return count;
         }
-
-        throw new Exception(null); //Restaurant not found
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error");
+            return 0;
+        }
     }
 
     public void SortByAvailability(DateTime dateTime)
     {
         try
-        { 
+        {
             bool swapped;
             do
             {
@@ -112,27 +136,6 @@ public class ReservationManagerClass
         catch (Exception ex)
         {
             Console.WriteLine("Error");
-        }
-    }
-
-    public int CountAvailableTables(RestaurantClass restaurant, DateTime dateTime)
-    {
-        try
-        {
-            int count = 0;
-            foreach (var table in restaurant.table)
-            {
-                if (!table.IsBooked(dateTime))
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error");
-            return 0;
         }
     }
 }
