@@ -8,34 +8,40 @@ namespace TableReservation
     {
         static void Main(string[] args)
         {
-            ReservationManagerClass manager = new ReservationManagerClass();
-            manager.AddRestaurantMethod("A", 10);
-            manager.AddRestaurantMethod("B", 5);
+            ReservationManager manager = new();
+            manager.AddRestaurant("A", 10);
+            manager.AddRestaurant("B", 5);
 
-            Console.WriteLine(manager.BookTable("A", new DateTime(2023, 12, 25), 3)); // True
-            Console.WriteLine(manager.BookTable("A", new DateTime(2023, 12, 25), 3)); // False
+            bool result1 = manager.BookTable("A", new DateTime(2023, 12, 25), 3);
+            bool result2 = manager.BookTable("A", new DateTime(2023, 12, 25), 3);
+
+            Console.WriteLine(result1); // True
+            Console.WriteLine(result2); // False
         }
     }
 
-    public class ReservationManagerClass
+    public class ReservationManager
     {
-        public List<RestaurantClass> res;
+        public List<Restaurant> res;
 
-        public ReservationManagerClass()
+        public ReservationManager()
         {
-            res = new List<RestaurantClass>();
+            res = new List<Restaurant>();
         }
 
-        public void AddRestaurantMethod(string name, int table)
+        public void AddRestaurant(string name, int table)
         {
             try
             {
-                RestaurantClass restoraunt = new RestaurantClass();
-                restoraunt.name = name;
-                restoraunt.table = new RestaurantTableClass[table];
+                Restaurant restoraunt = new()
+                {
+                    name = name,
+                    table = new RestaurantTable[table]
+                };
+
                 for (int i = 0; i < table; i++)
                 {
-                    restoraunt.table[i] = new RestaurantTableClass();
+                    restoraunt.table[i] = new RestaurantTable();
                 }
                 res.Add(restoraunt);
             }
@@ -64,13 +70,13 @@ namespace TableReservation
         }
     }
 
-    public class TablesManager : ReservationManagerClass
+    public class TablesManager : ReservationManager
     {
         public List<string> FindAllFreeTables(DateTime dateTime)
         {
             try
             {
-                List<string> free = new List<string>();
+                List<string> free = new();
                 foreach (var restoraunt in res)
                 {
                     for (int i = 0; i < restoraunt.table.Length; i++)
@@ -90,7 +96,7 @@ namespace TableReservation
             }
         }
 
-        public int CountAvailableTables(RestaurantClass restaurant, DateTime dateTime)
+        public int CountAvailableTables(Restaurant restaurant, DateTime dateTime)
         {
             try
             {
@@ -142,17 +148,17 @@ namespace TableReservation
         }
     }
 
-    public class RestaurantClass
+    public class Restaurant
     {
         public string name;
-        public RestaurantTableClass[] table;
+        public RestaurantTable[] table;
     }
 
-    public class RestaurantTableClass
+    public class RestaurantTable
     {
         private List<DateTime> bookedDates;
 
-        public RestaurantTableClass()
+        public RestaurantTable()
         {
             bookedDates = new List<DateTime>();
         }
