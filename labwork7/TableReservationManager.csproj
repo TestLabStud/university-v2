@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="xUnixProj\**" />
+    <EmbeddedResource Remove="xUnixProj\**" />
+    <None Remove="xUnixProj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="xunit.core" Version="2.6.3" />
   </ItemGroup>
 
