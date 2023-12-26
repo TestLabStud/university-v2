@@ -15,8 +15,8 @@ namespace TableReservation
             bool result1 = manager.BookTable("A", new DateTime(2023, 12, 25), 3);
             bool result2 = manager.BookTable("A", new DateTime(2023, 12, 25), 3);
 
-            Console.WriteLine(result1); // True
-            Console.WriteLine(result2); // False
+            Console.WriteLine(result1);
+            Console.WriteLine(result2);
         }
     }
 
@@ -31,6 +31,11 @@ namespace TableReservation
 
         public void AddRestaurant(string name, int table)
         {
+            if (name == string.Empty)
+            {
+                throw new ArgumentException("Error - empty name");
+            }
+
             try
             {
                 Restaurant restoraunt = new()
