@@ -1,0 +1,35 @@
+(bool IsWithNumeration, bool IsWithFlightNumber, bool IsWithAirline, 
+bool IsWithDestination, bool IsWithDepartureTime, bool IsWithArrivalTime, 
+bool IsWithStatus, bool IsWithDuration, bool IsWithAircraftType, bool IsWithTerminal)
+
+Console.WriteLine("Num: " + (flightsPr.IndexOf(fl)+1) + "; Flight number: " + fl.FlightNumber 
++ "; Airline: " + fl.Airline + "; Destination: " + fl.Destination + "; Departure and arrival time: "
++ fl.DepartureTime + "-" + fl.ArrivalTime + "; Status: " + fl.Status + "; Duration: " + fl.Duration
++ "; Aircrraft type: " + fl.AircraftType + "; Terminal: " + fl.Terminal);
+
+// flightSystem.SerializeJSON(flightsList, "test.json");
+
+// string nice = "C:/Users/Volko/university-v2/labwork6/flights_data.json";
+// string notnice = "C:/Users/Volko/university-v2/labwork6/flights_data_with_errors.json";
+
+// flightSystem.PrintListFlights(flightsList, true);
+
+public enum SortingOption
+{
+    FlightNumber,
+    Airline,
+    Destination,
+    DepartureTime,
+    ArrivalTime,
+    Status,
+    Duration,
+    AircraftType,
+    Terminal,
+}
+
+
+listWithAirlane = listWithAirlane.OrderBy(airlineElem => airlineElem.DepartureTime).ToList();
+listWithStatus = listWithStatus.OrderBy(statusElem => statusElem.DepartureTime).ToList(); // departure time?
+listInBeginsDay = listInBeginsDay.OrderBy(begdayElem => begdayElem.DepartureTime).ToList();
+listInInterval = listInInterval.OrderBy(TIElem => TIElem.DepartureTime).ToList();
+listInEndsTI = listInEndsTI.OrderBy(endTIElem => endTIElem.ArrivalTime).ToList();
